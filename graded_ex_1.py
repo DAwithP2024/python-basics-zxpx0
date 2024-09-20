@@ -143,7 +143,7 @@ def main():
                 elif option == 4:  # Finish shopping
                     display_cart(cart)
                     if cart:  # If cart is not empty
-                        total_cost = sum(quantity * next(price for name, price in products[selected_category] if name == product) for product, quantity in cart)
+                        total_cost = sum(quantity * next(price for name, price in products[cat] if name == product) for cat in products for product, quantity in cart)
                         address = input("Enter delivery address: ")
                         generate_receipt(name, email, cart, total_cost, address)
                     else:
