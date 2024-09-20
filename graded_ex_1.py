@@ -105,7 +105,7 @@ def main():
                 print("4. Finish shopping")
                 option = int(input("Choose an option: "))
 
-                if option == 1:
+                if option == 1:  # Select a product to buy
                     product_choice = int(input("Enter the product number: "))
                     product_list = products[selected_category]
                     
@@ -117,15 +117,22 @@ def main():
                     else:
                         print("Invalid product number.")
 
-                elif option == 2:
+                elif option == 2:  # Sort products by price
                     sort_order = int(input("Sort by price: 1 for ascending, 2 for descending: "))
-                    display_sorted_products(products[selected_category], sort_order)
+                    sorted_products = display_sorted_products(products[selected_category], sort_order)
+                    # Display options again after sorting
+                    print("\nOptions:")
+                    print("1. Select a product to buy")
+                    print("2. Sort the products by price")
+                    print("3. Go back to category selection")
+                    print("4. Finish shopping")
 
-                elif option == 3:
+                elif option == 3:  # Go back to category selection
                     break
 
-                elif option == 4:
-                    if cart:
+                elif option == 4:  # Finish shopping
+                    display_cart(cart)
+                    if cart:  # If cart is not empty
                         total_cost = sum(quantity * next(price for name, price in products[selected_category] if name == product) for product, quantity in cart)
                         address = input("Enter delivery address: ")
                         generate_receipt(name, email, cart, total_cost, address)
